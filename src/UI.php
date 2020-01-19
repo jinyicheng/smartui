@@ -3,6 +3,7 @@
 namespace SmartUI;
 
 use ReflectionClass;
+use ReflectionException;
 
 class UI {
 
@@ -77,6 +78,12 @@ class UI {
         $this->_track_start_time = microtime(true);
     }
 
+    /**
+     * @param $name
+     * @param $args
+     * @return mixed|object|null
+     * @throws ReflectionException
+     */
     public function __call($name, $args) {
         $calls = explode('_', $name);
         if (!in_array($calls[0], self::$_ui_calls)) {

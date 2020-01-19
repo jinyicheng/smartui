@@ -3,6 +3,7 @@
 namespace SmartUI;
 
 use Closure;
+use ReflectionException;
 use ReflectionFunction;
 
 class Util {
@@ -67,7 +68,7 @@ class Util {
     }
 
     public static function get_clean_structure($default_prop, $value, $closure_defaults = [], $default_key = '') {
-        $structure = self::get_property_value($value, array(
+        return self::get_property_value($value, array(
             'if_array' => function ($value) use ($default_prop, $default_key) {
                 return self::set_array_prop_def($default_prop, $value, $default_key);
             },
@@ -79,8 +80,6 @@ class Util {
                 return $default_prop;
             }
         ));
-
-        return $structure;
     }
 
     public static function set_closure_prop_def($default_structure, $callback_value, $callback_defaults = [], $set_to_key_if_fail = "") {
@@ -117,6 +116,12 @@ class Util {
         return $default_structure;
     }
 
+    /**
+     * @param $callback
+     * @param $default_args
+     * @return mixed
+     * @throws ReflectionException
+     */
     public static function run_callback($callback, $default_args) {
         $reflection = new ReflectionFunction($callback);
         $params = $reflection->getParameters();

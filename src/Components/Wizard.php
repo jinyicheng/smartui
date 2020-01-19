@@ -45,7 +45,7 @@ class Wizard extends UI {
 		if (isset($this->_structure->{$name})) {
             return $this->_structure->{$name};
         }
-        SmartUI::err('Undefined structure property: '.$name);
+        parent::err('Undefined structure property: '.$name);
         return null;
 	}
 
@@ -54,7 +54,7 @@ class Wizard extends UI {
             $this->_structure->{$name} = $value;
             return;
         }
-		SmartUI::err('Undefined structure property: '.$name);
+		parent::err('Undefined structure property: '.$name);
 	}
 
 	public function __call($name, $args) {
@@ -68,10 +68,10 @@ class Wizard extends UI {
 
 		$steps = Util::get_property_value($structure->step, array(
 			'if_closure' => function($steps) {
-				return SmartUI::run_callback($steps, array($this));
+				return Util::run_callback($steps, array($this));
 			},
 			'if_other' => function($steps) {
-				SmartUI::err('SmartUI::Wizard::step requires array');
+				parent::err('SmartUI::Wizard::step requires array');
 				return null;
 			}
 		));
@@ -98,7 +98,7 @@ class Wizard extends UI {
 			foreach ($new_step_prop as $step_prop_key => $step_prop_vaue) {
 				$new_step_prop_value = Util::get_property_value($step_prop_vaue, array(
 					'if_closure' => function($prop_value) use ($steps) {
-						return SmartUI::run_callback($prop_value, array($this, $steps));
+						return Util::run_callback($prop_value, array($this, $steps));
 					}
 				));
 				$new_step_prop[$step_prop_key] = $new_step_prop_value;
