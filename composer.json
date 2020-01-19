@@ -1,0 +1,24 @@
+{
+    "name": "jinyicheng/smartui",
+    "description": "smartui for laravel6.*",
+    "keywords": [
+        "laravel",
+        "ui"
+    ],
+    "homepage": "https://github.com/jinyicheng/smartui",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jinyicheng",
+            "email": "234067496@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SmartUI\\": "src"
+        }
+    }
+}
