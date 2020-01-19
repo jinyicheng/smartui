@@ -7,7 +7,6 @@ use \SmartUI\Util;
 class Widget extends UI {
 
 	private $_options_map = array(
-		"editbutton" => true,
 		"colorbutton" => true,
 		"editbutton" => true,
 		"togglebutton" => true,
